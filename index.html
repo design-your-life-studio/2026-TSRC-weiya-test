@@ -247,7 +247,7 @@
         }
 
         .title-sup {
-            font-size: 1.35rem; /* 原 1.5rem，縮小10% */
+            font-size: 1.5rem; 
             font-weight: 900;
             color: #ffffff;
             background: #E63946;
@@ -262,7 +262,7 @@
         }
 
         .title-main {
-            font-size: clamp(4.05rem, 18vw, 4.95rem); /* 原 clamp(4.5rem, 20vw, 5.5rem)，縮小10% */
+            font-size: clamp(4.5rem, 20vw, 5.5rem); 
             font-weight: 900;
             color: #ffffff;
             letter-spacing: 2px;
@@ -451,8 +451,12 @@
         }
 
         /* ================= 結果頁塗鴉動畫 ================= */
+        @keyframes resultDoodleFloat {
+            0%, 100% { transform: scale(1.25) translateY(0) rotate(-2deg); }
+            50% { transform: scale(1.25) translateY(-10px) rotate(2deg); }
+        }
         .animate-result-doodle {
-            transform: scale(1.25) rotate(-2deg);
+            animation: resultDoodleFloat 3.5s ease-in-out infinite;
             transform-origin: center center;
         }
 
@@ -570,12 +574,12 @@
             <!-- 首頁背景裝飾圖標 -->
             <div class="absolute inset-0 z-0 overflow-hidden" id="decor-container">
                 <!-- 裝飾 1：tsrc-01.png -->
-                <div class="floating-decor absolute top-[calc(10%-10px)] left-[calc(10%-10px)]" id="decor-1">
+                <div class="floating-decor absolute top-[calc(10%-10px)] left-[10%]" id="decor-1">
                     <img src="images/tsrc-01.png" alt="裝飾1" class="w-[100px] h-auto pointer-events-none transform -rotate-12" onerror="this.src='https://placehold.co/100x100/00000000/111?text=tsrc-01.png'">
                 </div>
 
                 <!-- 裝飾 2：tsrc-02.png -->
-                <div class="floating-decor delay-1 absolute top-[calc(18%-5px)] right-[6%]" id="decor-2">
+                <div class="floating-decor delay-1 absolute top-[18%] right-[6%]" id="decor-2">
                     <img src="images/tsrc-02.png" alt="裝飾2" class="w-[90px] h-auto pointer-events-none transform rotate-12" onerror="this.src='https://placehold.co/90x90/00000000/111?text=tsrc-02.png'">
                 </div>
 
@@ -585,7 +589,7 @@
                 </div>
 
                 <!-- 裝飾 4：tsrc-04.png -->
-                <div class="floating-decor delay-3 absolute top-[calc(44%+15px)] right-[10%]" id="decor-4">
+                <div class="floating-decor delay-3 absolute top-[calc(44%-15px)] right-[10%]" id="decor-4">
                     <img src="images/tsrc-04.png" alt="裝飾4" class="w-[100px] h-auto pointer-events-none transform rotate-[15deg]" onerror="this.src='https://placehold.co/100x100/00000000/111?text=tsrc-04.png'">
                 </div>
             </div>
@@ -602,13 +606,11 @@
                         <div class="absolute inset-0 bg-[#0077B6] rounded-[28px] border-[4px] border-[#111] transform rotate-[4deg]"></div>
                         <div class="bg-white border-[4px] border-[#111] rounded-[28px] p-6 relative transform rotate-[-2deg] flex flex-col items-center shadow-[6px_6px_0_#111]">
                             <div class="w-10 h-2 bg-[#FFD306] border-[2px] border-[#111] rounded-full mb-4"></div>
-                            <p class="text-[#111] text-[13px] font-bold leading-relaxed text-center pointer-events-none w-full max-w-[300px]">
-                                尾牙倒數計時！<br>
-                                準備好迎接2027台橡旺年會了嗎？<br>
-                                不管你是哪一種職場狠角色，<br>
-                                先來測驗看看你的辦公室隱藏屬性，<br>
-                                看看誰才是最受矚目的<br>
-                                傳說級神隊友！
+                            <p class="text-[#111] text-sm font-bold leading-loose text-center pointer-events-none">
+                                努力一整年，尾牙抽大獎的日子要來啦！<br>
+                                在台橡的職場叢林中，<br>
+                                你的員工類型是什麼呢？<br>
+                                只需 6 題，測出你的專屬辦公室人設！
                             </p>
                         </div>
                     </div>
@@ -711,9 +713,9 @@
                     <p class="text-[#111] font-black text-base mb-1 tracking-wide">❤️ 期待在旺年會見到你 ❤️</p>
                     <p class="text-gray-500 font-bold text-xs mb-6">2027年台橡旺年會｜活動籌備中</p>
                     
-                    <a href="https://www.facebook.com/profile.php?id=61569589793064" target="_blank" onclick="playClickSFX()" class="w-full py-4 bg-[#0077B6] border-[3px] border-[#111] rounded-2xl shadow-[4px_4px_0_#111] flex items-center justify-center gap-2 active:translate-y-[2px] active:shadow-none text-white transition-transform hover:scale-[1.02] mb-6 no-underline">
+                    <button onclick="showToast('將連結至旺年會活動頁面(籌備中活動暫未開始)')" class="w-full py-4 bg-[#0077B6] border-[3px] border-[#111] rounded-2xl shadow-[4px_4px_0_#111] flex items-center justify-center gap-2 active:translate-y-[2px] active:shadow-none text-white transition-transform hover:scale-[1.02] mb-6">
                         <span class="text-base font-black tracking-widest">前往活動專區</span>
-                    </a>
+                    </button>
 
                     <div class="w-full">
                         <!-- 加入 cursor-pointer 提示可點擊 -->
