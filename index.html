@@ -30,9 +30,11 @@
     <!-- 引入 Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+    <!-- 引入 html2canvas 截圖函式庫 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
         :root {
-            /* 從主視覺海報萃取天空藍背景 */
             --bg-color: #81D4FA; 
             --dot-color: #111;
         }
@@ -52,7 +54,6 @@
             transition: background-color 0.4s ease;
         }
 
-        /* 螢幕震動效果 */
         @keyframes screenShake {
             0% { transform: translate(0, 0); }
             10% { transform: translate(-5px, -5px); }
@@ -82,7 +83,7 @@
             flex-direction: column;
         }
 
-        /* ================= 跑馬燈動畫 ================= */
+        /* 跑馬燈動畫 */
         .marquee-bar {
             position: fixed;
             top: 0;
@@ -117,7 +118,7 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* ================= 普普風爆裂動畫 (含 GO!) ================= */
+        /* 普普風爆裂動畫 */
         .pop-burst-overlay {
             position: fixed;
             top: 0;
@@ -210,7 +211,7 @@
         .delay-2 { animation-delay: -2.5s; animation-duration: 4.5s; }
         .delay-3 { animation-delay: -1.5s; animation-duration: 6s; }
 
-        /* ================= 頁面基礎設定 ================= */
+        /* 頁面基礎設定 */
         .page {
             display: none;
             flex-direction: column;
@@ -247,7 +248,7 @@
         }
 
         .title-sup {
-            font-size: 1.35rem; /* 原 1.5rem，縮小10% */
+            font-size: 1.35rem; 
             font-weight: 900;
             color: #ffffff;
             background: #E63946;
@@ -262,7 +263,7 @@
         }
 
         .title-main {
-            font-size: clamp(4.05rem, 18vw, 4.95rem); /* 原 clamp(4.5rem, 20vw, 5.5rem)，縮小10% */
+            font-size: clamp(4.05rem, 18vw, 4.95rem); 
             font-weight: 900;
             color: #ffffff;
             letter-spacing: 2px;
@@ -293,7 +294,7 @@
             50% { transform: translateY(-8px) rotate(-5deg); }
         }
 
-        /* ================= 選項樣式 ================= */
+        /* 選項樣式 */
         .quiz-option {
             transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
             -webkit-tap-highlight-color: transparent;
@@ -353,7 +354,7 @@
         }
         #share-modal.active { transform: translate(-50%, 0); }
 
-        /* ================= 海報燈箱樣式 ================= */
+        /* 海報燈箱樣式 */
         #poster-lightbox-overlay {
             position: fixed;
             inset: 0;
@@ -409,7 +410,7 @@
             z-index: 1210;
         }
 
-        /* ================= 倒數動畫 ================= */
+        /* 倒數動畫 */
         #countdown-overlay {
             position: fixed;
             top: 0;
@@ -450,7 +451,7 @@
             opacity: 1;
         }
 
-        /* ================= 結果頁塗鴉動畫 ================= */
+        /* 結果頁塗鴉動畫 */
         .animate-result-doodle {
             transform: scale(1.25) rotate(-2deg);
             transform-origin: center center;
@@ -479,8 +480,8 @@
         }
         .stamp-auth {
             position: absolute;
-            bottom: 0%; /* 將 top: 10% 改為 bottom: 0% */
-            right: 5%;  /* 微調 right 的位置 */
+            bottom: 0%; 
+            right: 5%;  
             width: 80px;
             height: 80px;
             border: 4px solid #E63946;
@@ -512,7 +513,7 @@
         }
         .stamp-auth.animate {
             animation: stampEffect 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            animation-delay: 0.8s; /* 延遲出現，增加儀式感 */
+            animation-delay: 0.8s; 
         }
     </style>
 </head>
@@ -569,22 +570,15 @@
             
             <!-- 首頁背景裝飾圖標 -->
             <div class="absolute inset-0 z-0 overflow-hidden" id="decor-container">
-                <!-- 裝飾 1：tsrc-01.png -->
                 <div class="floating-decor absolute top-[calc(10%-10px)] left-[calc(10%-10px)]" id="decor-1">
                     <img src="images/tsrc-01.png" alt="裝飾1" class="w-[100px] h-auto pointer-events-none transform -rotate-12" onerror="this.src='https://placehold.co/100x100/00000000/111?text=tsrc-01.png'">
                 </div>
-
-                <!-- 裝飾 2：tsrc-02.png -->
                 <div class="floating-decor delay-1 absolute top-[calc(18%-5px)] right-[6%]" id="decor-2">
                     <img src="images/tsrc-02.png" alt="裝飾2" class="w-[90px] h-auto pointer-events-none transform rotate-12" onerror="this.src='https://placehold.co/90x90/00000000/111?text=tsrc-02.png'">
                 </div>
-
-                <!-- 裝飾 3：tsrc-03.png -->
                 <div class="floating-decor delay-2 absolute top-[calc(46%-15px)] left-[12%]" id="decor-3">
                     <img src="images/tsrc-03.png" alt="裝飾3" class="w-[90px] h-auto pointer-events-none transform -rotate-12" onerror="this.src='https://placehold.co/90x90/00000000/111?text=tsrc-03.png'">
                 </div>
-
-                <!-- 裝飾 4：tsrc-04.png -->
                 <div class="floating-decor delay-3 absolute top-[calc(44%+15px)] right-[10%]" id="decor-4">
                     <img src="images/tsrc-04.png" alt="裝飾4" class="w-[100px] h-auto pointer-events-none transform rotate-[15deg]" onerror="this.src='https://placehold.co/100x100/00000000/111?text=tsrc-04.png'">
                 </div>
@@ -629,7 +623,6 @@
                     <button onclick="restartQuiz()" class="w-10 h-10 bg-white border-[2px] border-[#111] rounded-full flex items-center justify-center shadow-[2px_2px_0_#111] active:translate-y-[1px] active:shadow-none flex-shrink-0">
                         <i class="ph-bold ph-house text-xl text-[#111]"></i>
                     </button>
-                    <!-- 修正進度條的圓角與 iOS 裁切白邊問題 -->
                     <div class="flex-grow relative h-4 bg-white border-[3px] border-[#111] rounded-full overflow-hidden shadow-[3px_3px_0_rgba(0,0,0,0.05)] z-0" style="-webkit-mask-image: -webkit-radial-gradient(white, black);">
                         <div id="progress-bar" class="absolute top-0 -left-1 h-full bg-[#E63946] transition-all duration-300 rounded-full" style="width: 4px;"></div>
                     </div>
@@ -658,7 +651,7 @@
             
             <div class="flex flex-col w-full h-full pt-[120px] pb-12 gap-8">
                 
-                <!-- 測驗結果卡片 -->
+                <!-- 測驗結果卡片 (截圖範圍) -->
                 <div id="export-container" class="w-full">
                     <div id="result-card" class="bg-white rounded-[32px] px-6 pt-5 pb-4 border-[4px] border-[#111] shadow-[8px_8px_0_#111] flex flex-col items-center text-center relative overflow-hidden w-full">
                         
@@ -671,7 +664,6 @@
                         <div class="w-full flex flex-col items-center px-1">
                             <div id="result-icon" class="relative z-10 w-full flex items-center justify-center pointer-events-none drop-shadow-xl -mt-2 -mb-6">
                                 🐾
-                                <!-- 蓋章認證 -->
                                 <div id="stamp" class="stamp-auth">認證<br>完成</div>
                             </div>
                             
@@ -696,14 +688,24 @@
                     </div>
                 </div>
 
-                <div class="w-full flex justify-between gap-4">
-                    <button onclick="restartQuiz()" class="flex-1 py-4 bg-white border-[3px] border-[#111] rounded-2xl shadow-[4px_4px_0_#111] flex flex-col items-center justify-center gap-1 active:translate-y-[2px] active:shadow-none">
-                        <i class="ph-bold ph-arrow-counter-clockwise text-xl"></i>
-                        <span class="text-xs font-black">再測一次</span>
+                <!-- ★三個並排按鈕區塊★ -->
+                <div class="flex justify-between gap-2 w-full px-1">
+                    <!-- 再測一次 -->
+                    <button onclick="restartQuiz()" class="flex-1 py-3 bg-white border-[3px] border-[#111] rounded-[16px] shadow-[4px_4px_0_#111] flex flex-col items-center justify-center gap-1 active:translate-y-[2px] active:shadow-none transition-transform hover:scale-[1.02]">
+                        <i class="ph-bold ph-arrow-counter-clockwise text-xl text-[#111]"></i>
+                        <span class="text-xs font-black text-[#111] whitespace-nowrap mt-1">再測一次</span>
                     </button>
-                    <button onclick="showShareModal()" class="flex-1 py-4 bg-[#81D4FA] border-[3px] border-[#111] rounded-2xl shadow-[4px_4px_0_#111] flex flex-col items-center justify-center gap-1 active:translate-y-[2px] active:shadow-none text-[#111]">
-                        <i class="ph-bold ph-share-network text-xl"></i>
-                        <span class="text-xs font-black">分享結果</span>
+
+                    <!-- 下載結果 (白底) -->
+                    <button onclick="downloadResultCard(event)" class="flex-1 py-3 bg-white border-[3px] border-[#111] rounded-[16px] shadow-[4px_4px_0_#111] flex flex-col items-center justify-center gap-1 active:translate-y-[2px] active:shadow-none transition-transform hover:scale-[1.02]">
+                        <i class="ph-bold ph-download-simple text-xl text-[#111]"></i>
+                        <span class="text-xs font-black text-[#111] whitespace-nowrap mt-1">下載結果</span>
+                    </button>
+
+                    <!-- 分享結果 (藍底) -->
+                    <button onclick="showShareModal()" class="flex-1 py-3 bg-[#81D4FA] border-[3px] border-[#111] rounded-[16px] shadow-[4px_4px_0_#111] flex flex-col items-center justify-center gap-1 active:translate-y-[2px] active:shadow-none transition-transform hover:scale-[1.02]">
+                        <i class="ph-bold ph-share-network text-xl text-[#111]"></i>
+                        <span class="text-xs font-black text-[#111] whitespace-nowrap mt-1">分享結果</span>
                     </button>
                 </div>
 
@@ -716,9 +718,7 @@
                     </a>
 
                     <div class="w-full">
-                        <!-- 加入 cursor-pointer 提示可點擊 -->
                         <div class="border-[4px] border-[#111] rounded-[24px] overflow-hidden shadow-[6px_6px_0_#111] bg-gray-50 flex items-center justify-center min-h-[200px] cursor-pointer" onclick="openPosterLightbox()">
-                            <!-- 修正：更新海報圖片路徑，加上 images/ 前綴 -->
                             <img src="images/main-poster.jpg" alt="2027年台橡旺年會海報" class="w-full h-auto block transition-transform hover:scale-105" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'p-8 text-gray-400 font-bold text-sm italic\'>請放入主視覺海報 (images/main-poster.jpg)</div>'">
                         </div>
                         <p class="text-[10px] text-gray-400 font-bold mt-2">點擊圖片可放大檢視</p>
@@ -814,7 +814,6 @@
             playClickSFX();
             const lightbox = document.getElementById('poster-lightbox-overlay');
             lightbox.style.display = 'flex';
-            // 延遲一點點加上 active 類別，讓 CSS transition 有作用
             setTimeout(() => {
                 lightbox.classList.add('active');
             }, 10);
@@ -826,22 +825,19 @@
             lightbox.classList.remove('active');
             setTimeout(() => {
                 lightbox.style.display = 'none';
-            }, 300); // 等待淡出動畫結束
+            }, 300); 
         }
 
         // ================= 拖曳邏輯 =================
         function makeDraggable(element) {
             let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
             
-            // 對於觸控設備
             element.addEventListener('touchstart', dragMouseDown, { passive: false });
-            // 對於滑鼠
             element.addEventListener('mousedown', dragMouseDown);
 
             function dragMouseDown(e) {
                 e.preventDefault();
                 
-                // 暫停原本的 CSS 漂浮動畫，避免拖曳時抖動
                 if (element.classList.contains('floating-decor')) {
                     element.style.animation = 'none';
                 }
@@ -854,7 +850,6 @@
                     pos4 = e.clientY;
                 }
                 
-                // 針對 absolute 與 relative 元件做不同的初始位置校正，防止跳動
                 const isAbsolute = window.getComputedStyle(element).position === 'absolute';
                 if (isAbsolute) {
                     if (!element.style.top || !element.style.left) {
@@ -893,13 +888,11 @@
             }
 
             function closeDragElement() {
-                // 停止拖曳
                 document.removeEventListener('mouseup', closeDragElement);
                 document.removeEventListener('mousemove', elementDrag);
                 document.removeEventListener('touchend', closeDragElement);
                 document.removeEventListener('touchmove', elementDrag);
                 
-                // 放開後恢復漂浮動畫 (加上微小延遲讓 transition 順暢)
                 if (element.classList.contains('floating-decor')) {
                     setTimeout(() => {
                         element.style.animation = '';
@@ -965,7 +958,6 @@
             }
         ];
 
-        // 更新圖片讀取路徑至 images 資料夾
         const resultsData = [
             { 
                 title: "佛系隱形人", 
@@ -1023,7 +1015,6 @@
                 img.src = result.icon;
             });
             const posterImg = new Image();
-            // 預載時也改為 images/main-poster.jpg
             posterImg.src = 'images/main-poster.jpg';
         }
 
@@ -1039,11 +1030,9 @@
             
             preloadImages();
             
-            // 初始化可拖曳物件
             const decors = document.querySelectorAll('.floating-decor');
             decors.forEach(decor => makeDraggable(decor));
             
-            // 標題字也加入拖曳
             const titleWrapper = document.getElementById('draggable-title');
             if (titleWrapper) makeDraggable(titleWrapper);
         };
@@ -1066,19 +1055,13 @@
             void showPage.offsetWidth; 
             showPage.classList.add('active');
             
-            // 如果不是結果頁，就回到最上方；如果是結果頁，則稍微往下捲動
             if (!isResult) {
                 showPage.scrollTop = 0;
             } else {
-                // 等待一下讓元素渲染完成，然後平滑捲動到剛好展示卡片主體的高度
                 setTimeout(() => {
                     const resultCard = document.getElementById('result-card');
                     if(resultCard) {
-                        // 改為 - 60，稍微保留上方一點點空間
-                        showPage.scrollTo({
-                            top: resultCard.offsetTop - 60, 
-                            behavior: 'smooth'
-                        });
+                        showPage.scrollTo({ top: resultCard.offsetTop - 60, behavior: 'smooth' });
                     }
                 }, 100);
             }
@@ -1106,7 +1089,7 @@
                     playClickSFX();
                     counter.textContent = num;
                     counter.classList.remove('pop');
-                    void counter.offsetWidth; // 觸發重繪
+                    void counter.offsetWidth; 
                     counter.classList.add('pop');
                 }, delay);
             };
@@ -1138,7 +1121,6 @@
             playClickSFX();
             switchPage(document.querySelector('.page.active'), document.getElementById('page-home'));
             
-            // 重置蓋章動畫
             const stamp = document.getElementById('stamp');
             if(stamp) {
                 stamp.classList.remove('animate');
@@ -1147,7 +1129,6 @@
 
         function renderQuestion(isFirst = false) {
             const qData = questions[currentQuestionIndex];
-            // 更新進度條，加上 4px 補償左側的 -left-1 偏移
             document.getElementById('progress-bar').style.width = `calc(${(currentQuestionIndex / questions.length) * 100}% + 4px)`;
             document.getElementById('question-counter').textContent = `${currentQuestionIndex + 1}/${questions.length}`;
             const quizCard = document.getElementById('quiz-card');
@@ -1196,7 +1177,6 @@
             const resultImg = document.createElement('img');
             resultImg.src = result.icon;
             resultImg.alt = result.title;
-            // 修正：移除垂直的 margin 外距 (my-4 改為 mt-3 mb-0)，將圖片緊湊擺放
             resultImg.className = "w-[85%] max-w-[350px] h-auto object-contain mx-auto mt-3 mb-0 animate-result-doodle";
             resultImg.onerror = function() {
                 this.style.display = 'none';
@@ -1204,7 +1184,6 @@
             };
             iconContainer.appendChild(resultImg);
             
-            // 重新加入蓋章元素
             const stampDiv = document.createElement('div');
             stampDiv.id = 'stamp';
             stampDiv.className = 'stamp-auth';
@@ -1224,13 +1203,57 @@
             });
             switchPage(document.getElementById('page-quiz'), document.getElementById('page-result'), true);
             
-            // 觸發蓋章動畫
             setTimeout(() => {
                 const stamp = document.getElementById('stamp');
                 if(stamp) {
                     stamp.classList.add('animate');
                 }
             }, 100);
+        }
+
+        // ================= ★新增的截圖下載功能★ =================
+        function downloadResultCard(event) {
+            playClickSFX();
+            const btn = event.currentTarget;
+            const originalHTML = btn.innerHTML;
+            
+            // 按鈕變成處理中狀態
+            btn.innerHTML = `
+                <i class="ph-bold ph-spinner animate-spin text-xl text-[#111]"></i>
+                <span class="text-xs font-black text-[#111] whitespace-nowrap mt-1">處理中</span>
+            `;
+            btn.style.pointerEvents = 'none';
+
+            // 抓取白色的結果卡片區塊
+            const cardElement = document.getElementById('result-card'); 
+
+            if(!cardElement) {
+                alert("找不到名片區塊！");
+                btn.innerHTML = originalHTML;
+                btn.style.pointerEvents = 'auto';
+                return;
+            }
+
+            // 執行 html2canvas 截圖
+            html2canvas(cardElement, {
+                scale: 2, 
+                useCORS: true, 
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `台橡神隊友_${currentResultTitle}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                // 恢復按鈕狀態
+                btn.innerHTML = originalHTML;
+                btn.style.pointerEvents = 'auto';
+            }).catch(err => {
+                console.error("截圖發生錯誤：", err);
+                alert("下載名片發生了一點狀況，請重新整理頁面再試一次！");
+                btn.innerHTML = originalHTML;
+                btn.style.pointerEvents = 'auto';
+            });
         }
 
         function showShareModal() {
