@@ -451,12 +451,8 @@
         }
 
         /* ================= 結果頁塗鴉動畫 ================= */
-        @keyframes resultDoodleFloat {
-            0%, 100% { transform: scale(1.25) translateY(0) rotate(-2deg); }
-            50% { transform: scale(1.25) translateY(-10px) rotate(2deg); }
-        }
         .animate-result-doodle {
-            animation: resultDoodleFloat 3.5s ease-in-out infinite;
+            transform: scale(1.25) rotate(-2deg);
             transform-origin: center center;
         }
 
