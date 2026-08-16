@@ -460,6 +460,21 @@
             transform-origin: center center;
         }
 
+        /* 結果標題的白色描邊效果 */
+        .result-title-stroke {
+            text-shadow: 
+                -3px -3px 0 #FFF, 
+                 0px -3px 0 #FFF, 
+                 3px -3px 0 #FFF, 
+                 3px  0px 0 #FFF, 
+                 3px  3px 0 #FFF, 
+                 0px  3px 0 #FFF, 
+                -3px  3px 0 #FFF, 
+                -3px  0px 0 #FFF,
+                -1px -1px 0 #FFF,
+                 1px  1px 0 #FFF;
+        }
+
         /* 蓋章動畫 */
         @keyframes stampEffect {
             0% { transform: scale(3) rotate(-25deg); opacity: 0; }
@@ -559,22 +574,22 @@
             <!-- 首頁背景裝飾圖標 -->
             <div class="absolute inset-0 z-0 overflow-hidden" id="decor-container">
                 <!-- 裝飾 1：tsrc-01.png -->
-                <div class="floating-decor absolute top-[10%] left-[10%]" id="decor-1">
+                <div class="floating-decor absolute top-[calc(10%-10px)] left-[10%]" id="decor-1">
                     <img src="images/tsrc-01.png" alt="裝飾1" class="w-[100px] h-auto pointer-events-none transform -rotate-12" onerror="this.src='https://placehold.co/100x100/00000000/111?text=tsrc-01.png'">
                 </div>
 
                 <!-- 裝飾 2：tsrc-02.png -->
-                <div class="floating-decor delay-1 absolute top-[18%] right-[6%]" id="decor-2">
+                <div class="floating-decor delay-1 absolute top-[calc(18%-5px)] right-[6%]" id="decor-2">
                     <img src="images/tsrc-02.png" alt="裝飾2" class="w-[90px] h-auto pointer-events-none transform rotate-12" onerror="this.src='https://placehold.co/90x90/00000000/111?text=tsrc-02.png'">
                 </div>
 
                 <!-- 裝飾 3：tsrc-03.png -->
-                <div class="floating-decor delay-2 absolute top-[46%] left-[12%]" id="decor-3">
+                <div class="floating-decor delay-2 absolute top-[calc(46%-15px)] left-[12%]" id="decor-3">
                     <img src="images/tsrc-03.png" alt="裝飾3" class="w-[90px] h-auto pointer-events-none transform -rotate-12" onerror="this.src='https://placehold.co/90x90/00000000/111?text=tsrc-03.png'">
                 </div>
 
                 <!-- 裝飾 4：tsrc-04.png -->
-                <div class="floating-decor delay-3 absolute top-[44%] right-[10%]" id="decor-4">
+                <div class="floating-decor delay-3 absolute top-[calc(44%+15px)] right-[10%]" id="decor-4">
                     <img src="images/tsrc-04.png" alt="裝飾4" class="w-[100px] h-auto pointer-events-none transform rotate-[15deg]" onerror="this.src='https://placehold.co/100x100/00000000/111?text=tsrc-04.png'">
                 </div>
             </div>
@@ -662,7 +677,7 @@
                                 <div id="stamp" class="stamp-auth">認證<br>完成</div>
                             </div>
                             
-                            <h2 id="result-title" class="text-[32px] font-black text-[#111] mt-0 mb-3 tracking-wide relative z-20">結果標題</h2>
+                            <h2 id="result-title" class="text-[32px] font-black text-[#111] mt-0 mb-3 tracking-wide relative z-20 result-title-stroke">結果標題</h2>
                             
                             <div id="result-tags" class="flex gap-2 justify-center mb-4 flex-wrap px-2 relative z-20"></div>
                             
